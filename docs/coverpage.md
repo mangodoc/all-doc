@@ -23,9 +23,12 @@
   font-size:14px;
 }
 .coverpage .desc{
-  padding-bottom: 20px;
   text-align: left;
   line-height: 25px;
+}
+.coverpage .version{
+  color: gray;
+  padding-bottom: 25px;
 }
 
 @media only screen and (max-width: 500px) {
@@ -49,8 +52,9 @@
     </template>
     <template slot="extra">
       <div class="desc" v-html="desc"></div>
+      <div class="version">版本： V{{version}}</div>
       <el-button type="default" size="medium" @click="handleClick('changelog')">更新日志</el-button>
-      <el-button type="primary" class="theme-color" size="medium" @click="handleClick('README')">查看主页</el-button>
+      <el-button type="primary" class="theme-color" size="medium" @click="handleClick('6abc/index')">快速开始</el-button>
     </template>
   </el-result>
   <el-row>

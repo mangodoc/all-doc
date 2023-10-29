@@ -1,16 +1,8 @@
 [
     {
-        "title": "首页",
-        "href": "#/README",
+        "title": "六大原则",
+        "href": "#/6abc/index",
         "target": "_self",
-        "level": 1,
-        "icon": "el-icon-s-home",
-        "index": "1"
-    },
-    {
-        "title": "前言",
-        "href": "",
-        "target": "_blank",
         "level": 1,
         "icon": "el-icon-s-promotion",
         "index": "2"
