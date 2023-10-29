@@ -1,0 +1,68 @@
+[
+    {
+        "title": "首页",
+        "href": "#/README",
+        "target": "_self",
+        "level": 1,
+        "icon": "el-icon-s-home",
+        "index": "1"
+    },
+    {
+        "title": "前言",
+        "href": "",
+        "target": "_blank",
+        "level": 1,
+        "icon": "el-icon-s-promotion",
+        "index": "2"
+    },
+    {
+        "title": "创建型模式",
+        "level": 1,
+        "icon": "el-icon-s-promotion",
+        "index": "3",
+        "children" : [
+            {
+                "title": "工厂模式",
+                "href": "",
+                "target": "_blank",
+                "level": 2,
+                "icon": "el-icon-s-promotion",
+                "index": "3-1"
+            }
+        ]
+    },
+    {
+        "title": "结构型模式",
+        "level": 1,
+        "icon": "el-icon-s-promotion",
+        "index": "4",
+        "children" : [
+            {
+                "title": "xx模式",
+                "href": "",
+                "target": "_blank",
+                "level": 2,
+                "icon": "el-icon-s-promotion",
+                "index": "4-1"
+            }
+        ]
+    },
+    {
+        "title": "行为型模式",
+        "level": 1,
+        "icon": "el-icon-s-promotion",
+        "index": "5",
+        "children" : [
+            {
+                "title": "xx模式",
+                "href": "",
+                "target": "_blank",
+                "level": 2,
+                "icon": "el-icon-s-promotion",
+                "index": "5-1"
+            }
+        ]
+    }
+
+    
+]

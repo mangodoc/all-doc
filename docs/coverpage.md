@@ -1,0 +1,102 @@
+<style type="text/css">
+.coverpage{
+  width:80%;
+  margin:0 auto;
+}
+.coverpage .logo{
+  width: 35%;
+}
+.coverpage .future-remark{
+  color:gray;
+  font-size:14px;
+  min-height:60px;
+}
+.coverpage .future-card{
+  margin:8px;
+}
+.coverpage .footer{
+  text-align:center;
+  color:gray;
+  padding-top:10px;
+}
+.coverpage .footer a{
+  font-size:14px;
+}
+.coverpage .desc{
+  padding-bottom: 20px;
+  text-align: left;
+  line-height: 25px;
+}
+
+@media only screen and (max-width: 500px) {
+  .coverpage{
+    width:98%;
+    margin:0 auto;
+  }
+  .coverpage .logo{
+    width: 80%;
+  }
+  .desc{
+    width:100%;
+  }
+}
+</style>
+
+<div class="coverpage">
+  <el-result style="margin:0 auto;">
+    <template slot="icon">
+      <img class="logo" src="/static/logo.png">
+    </template>
+    <template slot="extra">
+      <div class="desc" v-html="desc"></div>
+      <el-button type="default" size="medium" @click="handleClick('changelog')">更新日志</el-button>
+      <el-button type="primary" class="theme-color" size="medium" @click="handleClick('README')">查看主页</el-button>
+    </template>
+  </el-result>
+  <el-row>
+    <el-col :xs="24" :md="8" v-for="(item,index) in futures">
+      <el-card shadow="hover" class="future-card">
+        <h3>{{item.title}}</h3>
+        <div v-html="item.remark" class="future-remark">
+        </div>
+      </el-card>
+    </el-col>
+  </el-row>
+  <div v-html="footer" class="footer">
+  </div>
+</div>
+
+<script type="text/javascript">
+(
+  {
+    data(){
+      return {
+          footer: window.$mangodoc.footer,
+          title: window.$mangodoc.title,
+          version: window.$mangodoc.version,
+          desc: "学习设计模式后整理的笔记",
+          futures: [
+            {
+              title: "创建型模式",
+              remark: "1. 工厂模式"
+            },
+            {
+              title: "结构型模式",
+              remark: ""
+            },
+            {
+              title: "行为型模式",
+              remark: ""
+            }
+          ]
+      }
+    },
+    methods: {
+        handleClick(url) {
+          window.location.href = "/#/"+url;
+          window.location.reload();
+        }
+    }
+  }
+)
+</script>
