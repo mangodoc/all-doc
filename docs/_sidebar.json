@@ -5,6 +5,14 @@
         "target": "_self",
         "level": 1,
         "icon": "el-icon-s-promotion",
+        "index": "1"
+    },
+    {
+        "title": "GoF设计模式分类",
+        "href": "#/gof-kind",
+        "target": "_self",
+        "level": 1,
+        "icon": "el-icon-s-promotion",
         "index": "2"
     },
     {
