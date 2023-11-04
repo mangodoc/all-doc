@@ -94,7 +94,7 @@
             },
             {
               title: "行为型模式",
-              remark: ""
+              remark: "1. <a href='#/behavioral/chain' target='_blank'>责任链模式</a>"
             }
           ]
       }

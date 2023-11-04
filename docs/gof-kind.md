@@ -24,7 +24,7 @@ GoF所提出的23种设计模式主要基于以下面向对象设计原则：
 * 享元模式(Flyweight)
 
 ### 行为型模式 Behavioral Patterns
-* 责任链模式(Chain of Responsibility)
+* 责任链模式(Chain of Responsibility)：把请求从链中的一个对象传到下一个对象，<red>直到请求被响应为止</red>。通过这种方式去除对象之间的耦合。
 * 解释器模式(Interpreter)
 * 中介者模式(Mediator)
 * 观察者模式(Observer)
