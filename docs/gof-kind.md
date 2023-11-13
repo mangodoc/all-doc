@@ -34,6 +34,6 @@ GoF所提出的23种设计模式主要基于以下面向对象设计原则：
 * 迭代器模式(Iterator)
 * 备忘录模式(Memento)
 * 状态模式(State)
-* 模板方法模式(Template Method)
+* [模板方法模式(Template Method)](#/behavioral/template-method)：定义一个操作中的<red>算法骨架</red>，将算法的一些步骤<red>延迟到子类中</red>，使得子类在可以不改变该算法结构的情况下重定义该算法的某些特定步骤。
 
 
