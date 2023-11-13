@@ -60,6 +60,14 @@
                 "level": 2,
                 "icon": "el-icon-s-promotion",
                 "index": "5-1"
+            },
+            {
+                "title": "模板方法模式",
+                "href": "#/behavioral/template-method",
+                "target": "_blank",
+                "level": 2,
+                "icon": "el-icon-s-promotion",
+                "index": "5-2"
             }
         ]
     }
