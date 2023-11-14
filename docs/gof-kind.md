@@ -10,7 +10,7 @@ GoF所提出的23种设计模式主要基于以下面向对象设计原则：
 ### 创建型模式 Creational Patterns
 * 抽象工厂模式(Abstract Factory)
 * 工厂方法模式(Factory Method)
-* 单例模式(Singleton)
+* [单例模式(Singleton)](#/creational/singleton)：确保某个类只生成一个对象实例，然后提供一个静态方法获取实例对象。
 * 构建者模式(Builder)
 * 原型模式(Prototype)
 

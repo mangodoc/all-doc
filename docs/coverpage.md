@@ -82,11 +82,11 @@
           futures: [
             {
               title: "设计模式6大原则",
-              remark: "1. 单一职责原则 2. 开放封闭原则<br/>3. 依赖倒置原则 4. 里氏替换原则<br/>5. 接口隔离原则 6. 迪米特原则"
+              remark: "1. 单一职责原则 2. 开放封闭原则<br/>3. 依赖倒置原则 4. 里氏替换原则<br/>5. 接口隔离原则 6. 迪米特原则 <a href='#/6abc/index' target='_blank'>查看</a>"
             },
             {
               title: "创建型模式",
-              remark: "1. 工厂模式"
+              remark: "1. <a href='#/creational/singleton' target='_blank'>单例模式</a><br/>"
             },
             {
               title: "结构型模式",
