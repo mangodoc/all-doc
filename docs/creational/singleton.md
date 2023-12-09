@@ -5,6 +5,7 @@
 在实现类redis的服务端里，`ServerConf`服务端配置需要确保只有一个对象实例。故可以使用单例模式来实现。
 
 ## 代码示例
+### 饿汉式
 如下是饱汉式单例实现，基于jvm的static块只会执行一次的特性来实现。
 
 ``` java
@@ -24,6 +25,24 @@ public class ServerConf {
     }
 }
 ```
+
+### 静态内部类
+``` java
+public class ServerConf {
+
+    // 单例
+    private ServerConf(){}
+
+    private static class SingletonHolder {
+        private static final ServerConf INSTANCE = new ServerConf();
+    }
+
+    public static ServerConf getConf(){
+        return SingletonHolder.INSTANCE;
+    }
+}
+```
+
 ## 总结
 1. 将构造方法设置为`private`。
 2. 通过`static`块来创建一个对象。
