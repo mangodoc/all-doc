@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>设计模式</title>
+    <title>大刚学算法</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="description" content="Description">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
@@ -11,7 +11,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <link rel="stylesheet" href="https://mg.meiflower.top/oss/cdn/npm/element-ui/lib/theme-chalk/index.css">
-    <link rel="stylesheet" href="/static/css/dp.css">
+    <link rel="stylesheet" href="static/css/alg.css">
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
         <script src="https://gcore.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -27,43 +27,42 @@
           width: 40%;
         }
       }
-      
     </style>
   </head>
   <body>
     <div id="app"></div>
     <script>
         window.$mangodoc = {
-            title: '大刚学设计模式',
-            repo: 'https://github.com/mg0324/all-doc/tree/dp',
-            footer: '<span>mangodoc &copy; 2024 </span> ',
-            //themeColor: "blue",
-            //sideWidth: 320,
+            title: '大刚学算法',
+            repo: 'https://github.com/mg0324/all-doc/tree/alg',
+            footer: '<span>数据结构算法学习 &copy; 2024 </span> ',
+            themeColor: "green",
+            sideWidth: 250,
             alwaysRefresh: true,
-            version: "0.5.2",
+            version: "0.3.1",
+            menuOpens: ["3","3-2","3-2-5","4"],
             coverPage: true,
-            menuOpens: ["3","4","5"],
             theme: "simple",
             context: "",
-            // // giscus评论
-            // giscus:{
-            //   repo: "mg0324/docsify-comments",
-            //   repoId: "R_kgDOI68LwA",
-            //   category: "Announcements",
-            //   categoryId: "DIC_kwDOI68LwM4CUDhM",
-            //   mapping: "title",
-            //   reactionsEnabled: "1",
-            //   strict: "1",
-            //   emitMetadata: "0",
-            //   inputPosition: "bottom",
-            //   theme: "light",
-            //   lang: "zh-CN",
-            //   loading: "lazy"
-            // },
-            valine:{
-              appId: "fCOdL8JhkNjpvthWgwkBsCzS-gzGzoHsz",
-              appKey: "U3wqyVktKy6CjYu9KNFFySHK"
+            // giscus评论
+            giscus:{
+              repo: "mg0324/docsify-comments",
+              repoId: "R_kgDOI68LwA",
+              category: "Announcements",
+              categoryId: "DIC_kwDOI68LwM4CUDhM",
+              mapping: "title",
+              reactionsEnabled: "1",
+              strict: "1",
+              emitMetadata: "0",
+              inputPosition: "bottom",
+              theme: "light",
+              lang: "zh-CN",
+              loading: "lazy"
             },
+            // valine:{
+            //   appId: "fCOdL8JhkNjpvthWgwkBsCzS-gzGzoHsz",
+            //   appKey: "U3wqyVktKy6CjYu9KNFFySHK"
+            // },
             toc:{
               select: "h1, h2, h3, h4, h5, h6"
             },
@@ -111,6 +110,6 @@
     <script src="https://mg.meiflower.top/oss/cdn/npm/mangodoc-plantuml@1.0.1/dist/mangodoc-plantuml.min.js"></script>
 
     <!-- java语法高亮 -->
-    <script src="https://mg.meiflower.top/oss/cdn/npm/prismjs@1.29.0/components/prism-java.min.js"></script> 
+    <script src="https://mg.meiflower.top/oss/cdn/npm/prismjs@1.29.0/components/prism-java.min.js"></script>  
   </body>
 </html>

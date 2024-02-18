@@ -1,84 +1,107 @@
 [
     {
-        "title": "六大原则",
-        "href": "#/6abc/index",
+        "title": "首页",
+        "href": "#/",
         "target": "_self",
         "level": 1,
-        "icon": "el-icon-s-promotion",
+        "icon": "el-icon-s-home",
         "index": "1"
     },
     {
-        "title": "GoF设计模式分类",
-        "href": "#/gof-kind",
-        "target": "_self",
+        "title": "位运算",
         "level": 1,
-        "icon": "el-icon-s-promotion",
+        "icon": "el-icon-star-on",
+        "href": "#/wys",
+        "target": "_self",
         "index": "2"
     },
     {
-        "title": "创建型模式",
+        "title": "数据结构",
         "level": 1,
-        "icon": "el-icon-s-promotion",
+        "icon": "el-icon-star-on",
         "index": "3",
-        "children" : [
-            {
-                "title": "单例模式",
-                "href": "#/creational/singleton",
-                "target": "_blank",
+        "children":[{
+                "title": "目录索引",
                 "level": 2,
-                "icon": "el-icon-s-promotion",
+                "icon": "el-icon-star-on",
+                "href": "#/ds/index",
+                "target": "_self",
                 "index": "3-1"
+            },
+            {
+                
+                "title": "数据结构",
+                "level": 2,
+                "icon": "el-icon-star-on",
+                "index": "3-2",
+                "children":[
+                    {
+                        "title": "字符串和数组",
+                        "level": 3,
+                        "icon": "el-icon-star-on",
+                        "href": "#/ds/array/index",
+                        "target": "_self",
+                        "index": "3-2-1"
+                    },
+                    {
+                        "title": "链表",
+                        "level": 3,
+                        "icon": "el-icon-star-on",
+                        "href": "#/ds/linktable/index",
+                        "target": "_self",
+                        "index": "3-2-2"
+                    },
+                    {
+                        "title": "栈",
+                        "level": 3,
+                        "icon": "el-icon-star-on",
+                        "href": "#/ds/stack/index",
+                        "target": "_self",
+                        "index": "3-2-3"
+                    },
+                    {
+                        "title": "队列",
+                        "level": 3,
+                        "icon": "el-icon-star-on",
+                        "href": "#/ds/queue/index",
+                        "target": "_self",
+                        "index": "3-2-4"
+                    },
+                    {
+                        "title": "树",
+                        "level": 3,
+                        "icon": "el-icon-star-on",
+                        "index": "3-2-5",
+                        "children":[
+                            {
+                                "title": "二叉树",
+                                "level": 4,
+                                "icon": "el-icon-star-on",
+                                "href": "#/ds/tree/index",
+                                "target": "_self",
+                                "index": "3-2-4-1"
+                                
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     },
     {
-        "title": "结构型模式",
+        "title": "类型总结",
         "level": 1,
-        "icon": "el-icon-s-promotion",
+        "icon": "el-icon-star-on",
         "index": "4",
-        "children" : [
+        "children":[
             {
-                "title": "xx模式",
-                "href": "",
-                "target": "_blank",
+                "title": "注重边界",
                 "level": 2,
-                "icon": "el-icon-s-promotion",
+                "icon": "el-icon-star-on",
+                "href": "#/type/border/index",
+                "target": "_self",
                 "index": "4-1"
             }
         ]
-    },
-    {
-        "title": "行为型模式",
-        "level": 1,
-        "icon": "el-icon-s-promotion",
-        "index": "5",
-        "children" : [
-            {
-                "title": "责任链模式",
-                "href": "#/behavioral/chain",
-                "target": "_blank",
-                "level": 2,
-                "icon": "el-icon-s-promotion",
-                "index": "5-1"
-            },
-            {
-                "title": "模板方法模式",
-                "href": "#/behavioral/template-method",
-                "target": "_blank",
-                "level": 2,
-                "icon": "el-icon-s-promotion",
-                "index": "5-2"
-            },
-            {
-                "title": "策略模式",
-                "href": "#/behavioral/strategy",
-                "target": "_blank",
-                "level": 2,
-                "icon": "el-icon-s-promotion",
-                "index": "5-3"
-            }
-        ]
     }
-
-    
 ]
