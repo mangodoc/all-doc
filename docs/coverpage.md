@@ -98,7 +98,7 @@
     },
     methods: {
         handleClick(url) {
-          window.location.href = "/#/"+url;
+          window.location.href = window.$mangodoc.context + "/#/" + url;
           window.location.reload();
         }
     }
