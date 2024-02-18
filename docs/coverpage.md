@@ -6,6 +6,10 @@
 .coverpage .logo{
   width: 35%;
 }
+.coverpage .desc{
+  padding: 10px;
+  color: gray;
+}
 .coverpage .future-remark{
   color:gray;
   font-size:14px;
@@ -52,7 +56,6 @@
     </template>
     <template slot="extra">
       <div class="desc" v-html="desc"></div>
-      <div class="version">版本： V{{version}}</div>
       <el-button type="default" size="medium" @click="handleClick('changelog')">更新日志</el-button>
       <el-button type="primary" class="theme-color" size="medium" @click="handleClick('6abc/index')">快速开始</el-button>
     </template>
@@ -101,7 +104,7 @@
     },
     methods: {
         handleClick(url) {
-          window.location.href = "/#/"+url;
+          window.location.href = window.$mangodoc.context + "/#/" + url;
           window.location.reload();
         }
     }
