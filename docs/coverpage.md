@@ -81,7 +81,7 @@
             },
             {
               title: "数据结构基础篇",
-              remark: "1. 数组（字符串子串搜索之KMP算法）<br/> 2. 链表（单链表、双链表、环形链表、快慢指针）<br/> 3. 栈（先进先出、有效的括号、可做DFS实现）<br/> 4. 队列（后进先出、优先级队列、双端队列、可做BFS实现）<br/> 5. 哈希表（哈希函数、哈希表实现、一致性哈希算法）"
+              remark: "1. <a href='#/ds/array/index' target='_blank'>数组</a>（字符串子串搜索之KMP算法）<br/> 2. <a href='#/ds/linktable/index' target='_blank'>链表</a>（单链表、双链表、环形链表、快慢指针）<br/> 3.  <a href='#/ds/stack/index' target='_blank'>栈</a>（先进先出、有效的括号、可做DFS实现）<br/> 4. <a href='#/ds/queue/index' target='_blank'>队列</a>（后进先出、优先级队列、双端队列、可做BFS实现）<br/> 5. 哈希表（哈希函数、哈希表实现、一致性哈希算法）"
             },
             {
               title: "数据结构进阶篇",

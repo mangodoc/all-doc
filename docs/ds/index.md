@@ -1,10 +1,17 @@
+@@start
+{
+    "comment": false
+}
+@@end
+## 数据结构目录
+### 基础篇
 * [字符串和数组](#/ds/array/index)
 * [链表](#/ds/linktable/index)
 * [栈](#/ds/stack/index)
 * [队列](#/ds/queue/index)
   - [双端队列](#/ds/queue/deque)
   - [优先队列](#/ds/queue/priority)
-
+### 进阶篇
 * [树](%E6%A0%91.md)
     * [二叉树](%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91.md)
     * [二叉树的遍历](%E6%A0%91/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86.md)
@@ -27,10 +34,8 @@
     * [图的最小生成树之Prim算法](%E5%9B%BE%E7%9A%84%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E4%B9%8BPrim%E7%AE%97%E6%B3%95.md)
     * [图的最小生成树之Kruskal算法](%E5%9B%BE%E7%9A%84%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E4%B9%8BKruskal%E7%AE%97%E6%B3%95.md)
     * [图的最小单元路径之Dijkstra算法](%E5%9B%BE%E7%9A%84%E6%9C%80%E5%B0%8F%E5%8D%95%E5%85%83%E8%B7%AF%E5%BE%84%E4%B9%8BDijkstra%E7%AE%97%E6%B3%95.md)
-
 * [位图](%E4%BD%8D%E5%9B%BE.md)
     * [Java实现位图](Java%E5%AE%9E%E7%8E%B0%E4%BD%8D%E5%9B%BE.md)
-
 * [并查集](%E5%B9%B6%E6%9F%A5%E9%9B%86.md)
     * [Java实现并查集](Java%E5%AE%9E%E7%8E%B0%E5%B9%B6%E6%9F%A5%E9%9B%86.md)
 
