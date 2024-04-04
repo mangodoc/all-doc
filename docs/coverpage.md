@@ -97,7 +97,7 @@
             },
             {
               title: "行为型模式",
-              remark: "1. <a href='#/behavioral/chain' target='_blank'>责任链模式</a><br/>2. <a href='#/behavioral/template-method' target='_blank'>模板方法模式</a><br/>3. <a href='#/behavioral/strategy' target='_blank'>策略模式</a><br/>"
+              remark: "1. <a href='#/behavioral/chain' target='_blank'>责任链模式</a><br/>2. <a href='#/behavioral/template-method' target='_blank'>模板方法模式</a><br/>3. <a href='#/behavioral/strategy' target='_blank'>策略模式</a><br/>4. <a href='#/behavioral/observer' target='_blank'>观察者模式</a><br/>"
             }
           ]
       }
