@@ -84,8 +84,8 @@
           desc: "学习设计模式后整理的笔记",
           futures: [
             {
-              title: "设计模式6大原则",
-              remark: "1. 单一职责原则 2. 开放封闭原则<br/>3. 依赖倒置原则 4. 里氏替换原则<br/>5. 接口隔离原则 6. 迪米特原则 <a href='#/6abc/index' target='_blank'>查看</a>"
+              title: "前置理论",
+              remark: "1. <a href='#/6abc/index' target='_blank'>设计模式6大原则</a><br/>2. <a href='#/gof-kind' target='_blank'>GoF设计模式分类</a><br/>"
             },
             {
               title: "创建型模式",

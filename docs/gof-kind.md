@@ -27,7 +27,7 @@ GoF所提出的23种设计模式主要基于以下面向对象设计原则：
 * [责任链模式(Chain of Responsibility)](#/behavioral/chain)：把请求从链中的一个对象传到下一个对象，<red>直到请求被响应为止</red>。通过这种方式去除对象之间的耦合。
 * 解释器模式(Interpreter)
 * 中介者模式(Mediator)
-* 观察者模式(Observer)
+* [观察者模式(Observer)](#/behavioral/observer)：多个对象间存在一对多关系，当一个对象发生改变时，把这种改变通知给其他多个对象，从而影响其他对象的行为。
 * [策略模式(Strategy)](#/behavioral/strategy)：定义一组算法，运行时可动态切换去完成一件事情（或者一类事情，如获取纸指标和执行命令）。
 * 访问者模式(Visitor)
 * 命令模式(Command)
