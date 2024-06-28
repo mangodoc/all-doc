@@ -81,7 +81,7 @@
               title: "CPU修行总结",
               remark: "学习CPU，并跟随UP主完成一个8位的二进制CPU的电路设计和指令设计及实现，总结笔记！",
               enterDate: "2022-10-01",
-              url: "https://mgang.gitee.io/s-cpu/#/"
+              url: "https://scpu.netlify.app/"
             },
             {
               title: "大刚学Java体系",
