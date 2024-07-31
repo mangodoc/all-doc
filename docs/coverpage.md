@@ -49,7 +49,11 @@
     </template>
     <template slot="extra">
       <div class="desc" v-html="desc"></div>
-      <el-button type="default" size="medium" @click="handleClick('README')">查看主页</el-button>
+      <el-button type="success" size="medium" @click="handleClick('https://labuladong.online/algo/')">labuladong算法笔记</el-button>
+      <el-button type="default" size="medium" @click="handleClick('https://programmercarl.com/')">代码随想录</el-button>
+      <el-button type="warning" size="medium" @click="handleClick('https://www.cs.usfca.edu/~galles/visualization/Algorithms.html')">数据结构可视化</el-button>
+      <el-button type="danger" size="medium" @click="handleClick('https://visualgo.net/zh')">算法可视化</el-button>
+      <el-button type="success" size="medium" @click="handleClick('README')">查看主页</el-button>
       <el-button type="primary" size="medium" @click="handleClick('ds/index')">数据结构</el-button>
     </template>
   </el-result>
@@ -73,7 +77,7 @@
       return {
           footer: window.$mangodoc.footer,
           title: window.$mangodoc.title,
-          desc: "最开始是在B站看的左神的算法视频，决定开始整理算法学习笔记。后面又开始接触到labuladong和代码随想录，<br/>虽然大神们都有很多总结，但是要融会贯通还是得靠刻意练习。<a href='https://labaladong.github.io/algo'>labaladong算法笔记</a> <a href='https://programmercarl.com/'>代码随想录</a>",
+          desc: "最开始是在B站看的左神的算法视频，决定开始整理算法学习笔记。后面又开始接触到labuladong和代码随想录，<br/>虽然大神们都有很多总结，但是要融会贯通还是得靠刻意练习。",
           futures: [
             {
               title: "前言基础",
@@ -116,8 +120,12 @@
     },
     methods: {
         handleClick(url) {
-          window.location.href = window.$mangodoc.context+"/#/"+url;
-          window.location.reload();
+          if (url.startsWith("http")) {
+            window.open(url, '_blank');
+          } else {
+            window.location.href = window.$mangodoc.context+"/#/"+url;
+            window.location.reload();
+          }
         }
     }
   }
