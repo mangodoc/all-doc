@@ -11,7 +11,7 @@
 
 * 环形链表
 
-![](https://res.meiflower.top/.netlify/images?url=/alg/linktable/03.png&w=300)
+<img src="https://res.meiflower.top/.netlify/images?url=/alg/linktable/03.png" style="width:300px;">
 
 
 ### 优点  
