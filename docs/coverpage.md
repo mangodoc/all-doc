@@ -45,7 +45,7 @@
 <div class="coverpage">
   <el-result style="margin:0 auto;">
     <template slot="icon">
-      <img class="logo" src="static/logo.png">
+      <img class="logo" src="https://res.meiflower.top/.netlify/images?url=/alg/logo.png&w=70%">
     </template>
     <template slot="extra">
       <div class="desc" v-html="desc"></div>

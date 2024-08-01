@@ -3,15 +3,16 @@
 
 * 单链表
 
-![](https://res.meiflower.top/alg/linktable/01.png)
+![](https://res.meiflower.top/.netlify/images?url=/alg/linktable/01.png)
 
 * 双链表
 
-![](https://res.meiflower.top/alg/linktable/02.png)
+![](https://res.meiflower.top/.netlify/images?url=/alg/linktable/02.png)
 
 * 环形链表
 
-<img src="https://res.meiflower.top/alg/linktable/03.png" style="width:400px">
+![](https://res.meiflower.top/.netlify/images?url=/alg/linktable/03.png&w=300)
+
 
 ### 优点  
 1. 灵活分配内存空间。
