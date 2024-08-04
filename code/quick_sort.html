@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickSort Animation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        #container {
+            display: flex;
+            height: 300px;
+            align-items: flex-end;
+            margin: 20px 0;
+        }
+        .bar {
+            width: 20px;
+            margin: 0 2px;
+            background-color: #3498db;
+            transition: height 0.5s ease, background-color 0.5s ease;
+        }
+        #controls {
+            margin: 20px 0;
+        }
+        button {
+            margin: 0 10px;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>QuickSort Animation</h1>
+    <div id="container"></div>
+    <div id="controls">
+        <button onclick="generateArray()">Generate New Array</button>
+        <button onclick="startSort()">Start Sort</button>
+    </div>
+
+    <script>
+        let array = [];
+        let animationSteps = [];
+        const ANIMATION_DELAY = 1000;
+
+        function generateArray() {
+            array = Array.from({length: 15}, () => Math.floor(Math.random() * 100) + 1);
+            renderBars();
+        }
+
+        function renderBars() {
+            const container = document.getElementById('container');
+            container.innerHTML = '';
+            array.forEach((value, index) => {
+                const bar = document.createElement('div');
+                bar.className = 'bar';
+                bar.style.height = `${value * 3}px`;
+                bar.setAttribute('data-value', value);
+                container.appendChild(bar);
+            });
+        }
+
+        async function quickSort(arr, left = 0, right = arr.length - 1) {
+            if (left < right) {
+                const pivotIndex = await partition(arr, left, right);
+                await quickSort(arr, left, pivotIndex - 1);
+                await quickSort(arr, pivotIndex + 1, right);
+            }
+        }
+
+        async function partition(arr, left, right) {
+            const pivot = arr[right];
+            let i = left - 1;
+
+            for (let j = left; j < right; j++) {
+                if (arr[j] < pivot) {
+                    i++;
+                    await swap(arr, i, j);
+                }
+            }
+            await swap(arr, i + 1, right);
+            return i + 1;
+        }
+
+        async function swap(arr, i, j) {
+            animationSteps.push({type: 'compare', indices: [i, j]});
+            await animate();
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+            animationSteps.push({type: 'swap', indices: [i, j]});
+            await animate();
+        }
+
+        function animate() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    const step = animationSteps.shift();
+                    const bars = document.querySelectorAll('.bar');
+                    if (step.type === 'compare') {
+                        bars[step.indices[0]].style.backgroundColor = '#e74c3c';
+                        bars[step.indices[1]].style.backgroundColor = '#e74c3c';
+                    } else if (step.type === 'swap') {
+                        const tempHeight = bars[step.indices[0]].style.height;
+                        const tempValue = bars[step.indices[0]].getAttribute('data-value');
+                        
+                        bars[step.indices[0]].style.height = bars[step.indices[1]].style.height;
+                        bars[step.indices[0]].setAttribute('data-value', bars[step.indices[1]].getAttribute('data-value'));
+                        
+                        bars[step.indices[1]].style.height = tempHeight;
+                        bars[step.indices[1]].setAttribute('data-value', tempValue);
+                        
+                        bars[step.indices[0]].style.backgroundColor = '#2ecc71';
+                        bars[step.indices[1]].style.backgroundColor = '#2ecc71';
+                    }
+                    setTimeout(() => {
+                        bars.forEach(bar => bar.style.backgroundColor = '#3498db');
+                        resolve();
+                    }, ANIMATION_DELAY / 2);
+                }, ANIMATION_DELAY / 2);
+            });
+        }
+
+        async function startSort() {
+            animationSteps = [];
+            await quickSort(array);
+        }
+
+        // 初始化
+        generateArray();
+    </script>
+</body>
+</html>
