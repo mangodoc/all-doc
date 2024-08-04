@@ -36,10 +36,19 @@
             align-items: flex-end;
             margin: 20px 0;
         }
-        .bar {
+        .bar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             margin: 0 2px;
+        }
+        .bar {
             background-color: #3498db;
             transition: height 0.5s ease, background-color 0.5s ease;
+        }
+        .bar-value {
+            margin-top: 5px;
+            font-size: 12px;
         }
         pre {
             background-color: #f4f4f4;
@@ -125,12 +134,22 @@ function partition(arr, left, right) {
             const maxValue = Math.max(...array);
             const barWidth = Math.floor(300 / array.length);
             array.forEach((value, index) => {
+                const barContainer = document.createElement('div');
+                barContainer.className = 'bar-container';
+
                 const bar = document.createElement('div');
                 bar.className = 'bar';
                 bar.style.height = `${(value / maxValue) * 280}px`;
                 bar.style.width = `${barWidth}px`;
                 bar.setAttribute('data-value', value);
-                container.appendChild(bar);
+
+                const barValue = document.createElement('div');
+                barValue.className = 'bar-value';
+                barValue.textContent = value;
+
+                barContainer.appendChild(bar);
+                barContainer.appendChild(barValue);
+                container.appendChild(barContainer);
             });
         }
 
@@ -168,25 +187,32 @@ function partition(arr, left, right) {
             return new Promise(resolve => {
                 setTimeout(() => {
                     const step = animationSteps.shift();
-                    const bars = document.querySelectorAll('.bar');
+                    const barContainers = document.querySelectorAll('.bar-container');
                     if (step.type === 'compare') {
-                        bars[step.indices[0]].style.backgroundColor = '#e74c3c';
-                        bars[step.indices[1]].style.backgroundColor = '#e74c3c';
+                        barContainers[step.indices[0]].querySelector('.bar').style.backgroundColor = '#e74c3c';
+                        barContainers[step.indices[1]].querySelector('.bar').style.backgroundColor = '#e74c3c';
                     } else if (step.type === 'swap') {
-                        const tempHeight = bars[step.indices[0]].style.height;
-                        const tempValue = bars[step.indices[0]].getAttribute('data-value');
+                        const bar1 = barContainers[step.indices[0]].querySelector('.bar');
+                        const bar2 = barContainers[step.indices[1]].querySelector('.bar');
+                        const value1 = barContainers[step.indices[0]].querySelector('.bar-value');
+                        const value2 = barContainers[step.indices[1]].querySelector('.bar-value');
+
+                        const tempHeight = bar1.style.height;
+                        const tempValue = bar1.getAttribute('data-value');
                         
-                        bars[step.indices[0]].style.height = bars[step.indices[1]].style.height;
-                        bars[step.indices[0]].setAttribute('data-value', bars[step.indices[1]].getAttribute('data-value'));
+                        bar1.style.height = bar2.style.height;
+                        bar1.setAttribute('data-value', bar2.getAttribute('data-value'));
+                        value1.textContent = bar2.getAttribute('data-value');
                         
-                        bars[step.indices[1]].style.height = tempHeight;
-                        bars[step.indices[1]].setAttribute('data-value', tempValue);
+                        bar2.style.height = tempHeight;
+                        bar2.setAttribute('data-value', tempValue);
+                        value2.textContent = tempValue;
                         
-                        bars[step.indices[0]].style.backgroundColor = '#2ecc71';
-                        bars[step.indices[1]].style.backgroundColor = '#2ecc71';
+                        bar1.style.backgroundColor = '#2ecc71';
+                        bar2.style.backgroundColor = '#2ecc71';
                     }
                     setTimeout(() => {
-                        bars.forEach(bar => bar.style.backgroundColor = '#3498db');
+                        barContainers.forEach(container => container.querySelector('.bar').style.backgroundColor = '#3498db');
                         resolve();
                     }, ANIMATION_DELAY / 2);
                 }, ANIMATION_DELAY / 2);
