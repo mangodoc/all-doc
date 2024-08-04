@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickSort Visualization</title>
+    <title>快速排序可视化</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -37,7 +37,6 @@
             margin: 20px 0;
         }
         .bar {
-            width: 20px;
             margin: 0 2px;
             background-color: #3498db;
             transition: height 0.5s ease, background-color 0.5s ease;
@@ -52,13 +51,22 @@
             margin: 10px;
             padding: 10px 20px;
         }
+        .config {
+            margin: 10px 0;
+        }
+        label {
+            margin-right: 10px;
+        }
+        input {
+            width: 50px;
+        }
     </style>
 </head>
 <body>
-    <h1>QuickSort Visualization</h1>
+    <h1>快速排序可视化</h1>
     <div class="container">
         <div class="code-section">
-            <h2>QuickSort Algorithm</h2>
+            <h2>快速排序算法</h2>
             <pre><code>
 function quickSort(arr, left = 0, right = arr.length - 1) {
     if (left < right) {
@@ -85,11 +93,17 @@ function partition(arr, left, right) {
             </code></pre>
         </div>
         <div class="visualization-section">
-            <h2>Visualization</h2>
+            <h2>可视化</h2>
+            <div class="config">
+                <label for="arrayLength">数组长度:</label>
+                <input type="number" id="arrayLength" value="10" min="5" max="50">
+                <label for="animationSpeed">动画速度 (ms):</label>
+                <input type="number" id="animationSpeed" value="1000" min="100" max="3000" step="100">
+            </div>
             <div id="arrayContainer"></div>
             <div>
-                <button onclick="generateArray()">Generate New Array</button>
-                <button onclick="startSort()">Start Sort</button>
+                <button onclick="generateArray()">生成新数组</button>
+                <button onclick="startSort()">开始排序</button>
             </div>
         </div>
     </div>
@@ -97,20 +111,24 @@ function partition(arr, left, right) {
     <script>
         let array = [];
         let animationSteps = [];
-        const ANIMATION_DELAY = 1000;
+        let ANIMATION_DELAY = 1000;
 
         function generateArray() {
-            array = Array.from({length: 10}, () => Math.floor(Math.random() * 100) + 1);
+            const length = parseInt(document.getElementById('arrayLength').value);
+            array = Array.from({length: length}, () => Math.floor(Math.random() * 100) + 1);
             renderBars();
         }
 
         function renderBars() {
             const container = document.getElementById('arrayContainer');
             container.innerHTML = '';
+            const maxValue = Math.max(...array);
+            const barWidth = Math.floor(300 / array.length);
             array.forEach((value, index) => {
                 const bar = document.createElement('div');
                 bar.className = 'bar';
-                bar.style.height = `${value * 3}px`;
+                bar.style.height = `${(value / maxValue) * 280}px`;
+                bar.style.width = `${barWidth}px`;
                 bar.setAttribute('data-value', value);
                 container.appendChild(bar);
             });
@@ -176,6 +194,7 @@ function partition(arr, left, right) {
         }
 
         async function startSort() {
+            ANIMATION_DELAY = parseInt(document.getElementById('animationSpeed').value);
             animationSteps = [];
             await quickSort(array);
         }
