@@ -3,169 +3,310 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>快速排序可视化</title>
+    <title>排序算法可视化对比</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
-        }
-        .container {
-            display: flex;
-            width: 100%;
-            max-width: 1200px;
-        }
-        .code, .visualization {
-            flex: 1;
-            margin: 10px;
-        }
-        pre {
-            background-color: #f4f4f4;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-        #array {
-            display: flex;
-            height: 200px;
-            align-items: flex-end;
-            border-bottom: 1px solid #333;
-        }
-        .bar {
-            width: 20px;
-            background-color: #3498db;
-            margin: 0 1px;
-            transition: height 0.3s;
+            background-color: #f0f0f0;
         }
         .controls {
-            margin-top: 20px;
+            margin: 20px 0;
         }
-        .summary {
-            margin-top: 20px;
-            text-align: left;
-            width: 100%;
-            max-width: 1200px;
+        .visualizations {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .algorithm {
+            margin: 10px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .array-container {
+            display: flex;
+            align-items: flex-end;
+            height: 200px;
+            width: 200px;
+        }
+        .bar {
+            flex: 1;
+            background-color: #3498db;
+            margin: 0 1px;
+            position: relative;
+        }
+        .bar span {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>快速排序可视化</h1>
-    <div class="container">
-        <div class="code">
-            <h2>核心代码</h2>
-            <pre><code>
-function quickSort(arr, low, high) {
-    if (low < high) {
-        let pivotIndex = partition(arr, low, high);
-        quickSort(arr, low, pivotIndex - 1);
-        quickSort(arr, pivotIndex + 1, high);
-    }
-}
-
-function partition(arr, low, high) {
-    let pivot = arr[high];
-    let i = low - 1;
-    
-    for (let j = low; j < high; j++) {
-        if (arr[j] < pivot) {
-            i++;
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-    }
-    
-    [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
-    return i + 1;
-}
-            </code></pre>
-        </div>
-        <div class="visualization">
-            <h2>可视化动画</h2>
-            <div id="array"></div>
-            <div class="controls">
-                <label for="arraySize">数组大小：</label>
-                <input type="number" id="arraySize" min="5" max="50" value="20">
-                <label for="animationSpeed">动画速度：</label>
-                <input type="range" id="animationSpeed" min="1" max="1000" value="500">
-                <button onclick="initArray()">生成新数组</button>
-                <button onclick="startSort()">开始排序</button>
-            </div>
-        </div>
+    <h1>排序算法可视化对比</h1>
+    <div class="controls">
+        <label for="arraySize">数组大小：</label>
+        <input type="number" id="arraySize" min="5" max="50" value="20">
+        <label for="animationSpeed">动画速度：</label>
+        <input type="range" id="animationSpeed" min="1" max="1000" value="500">
+        <button onclick="initArrays()">重置数组</button>
+        <button onclick="startSort()">开始排序</button>
     </div>
-    <div class="summary">
-        <h2>快速排序算法特点总结</h2>
-        <ul>
-            <li>平均时间复杂度：O(n log n)</li>
-            <li>最坏时间复杂度：O(n²)，当数组已经排序或接近排序时</li>
-            <li>空间复杂度：O(log n)，因为使用递归</li>
-            <li>原地排序算法，不需要额外的数组空间</li>
-            <li>不稳定排序，相同元素的相对位置可能改变</li>
-            <li>分治策略：选择一个基准元素，将数组分为两部分，递归排序</li>
-            <li>对于大型数据集表现良好，是实践中最快的排序算法之一</li>
-            <li>随机选择基准元素可以提高算法在已排序数组上的性能</li>
-            <li>适合并行化，可以在多核处理器上高效实现</li>
-        </ul>
+    <div class="visualizations">
+        <div class="algorithm">
+            <h2>快速排序</h2>
+            <div id="quickSortArray" class="array-container"></div>
+        </div>
+        <div class="algorithm">
+            <h2>冒泡排序</h2>
+            <div id="bubbleSortArray" class="array-container"></div>
+        </div>
+        <div class="algorithm">
+            <h2>插入排序</h2>
+            <div id="insertionSortArray" class="array-container"></div>
+        </div>
+        <div class="algorithm">
+            <h2>选择排序</h2>
+            <div id="selectionSortArray" class="array-container"></div>
+        </div>
+        <div class="algorithm">
+            <h2>归并排序</h2>
+            <div id="mergeSortArray" class="array-container"></div>
+        </div>
+        <div class="algorithm">
+            <h2>堆排序</h2>
+            <div id="heapSortArray" class="array-container"></div>
+        </div>
     </div>
 
     <script>
-        let array = [];
-        let arraySize = 20;
-        let animationSpeed = 500;
+    let arrays = {};
+    let arraySize = 20;
+    let animationSpeed = 500;
 
-        function initArray() {
-            arraySize = parseInt(document.getElementById('arraySize').value);
-            array = Array.from({length: arraySize}, () => Math.floor(Math.random() * 100) + 1);
-            updateVisualization();
-        }
+    function initArrays() {
+        const arraySizeInput = document.getElementById('arraySize');
+        arraySize = arraySizeInput ? parseInt(arraySizeInput.value) || 20 : 20;
+        const baseArray = Array.from({length: arraySize}, () => Math.floor(Math.random() * 100) + 1);
+        arrays = {
+            quickSort: [...baseArray],
+            bubbleSort: [...baseArray],
+            insertionSort: [...baseArray],
+            selectionSort: [...baseArray],
+            mergeSort: [...baseArray],
+            heapSort: [...baseArray]
+        };
+        updateVisualizations();
+    }
 
-        function updateVisualization() {
-            const arrayContainer = document.getElementById('array');
-            arrayContainer.innerHTML = '';
-            const maxVal = Math.max(...array);
-            array.forEach(val => {
-                const bar = document.createElement('div');
-                bar.className = 'bar';
-                bar.style.height = `${(val / maxVal) * 100}%`;
-                arrayContainer.appendChild(bar);
-            });
-        }
-
-        async function quickSort(low, high) {
-            if (low < high) {
-                let pivotIndex = await partition(low, high);
-                await quickSort(low, pivotIndex - 1);
-                await quickSort(pivotIndex + 1, high);
+    function updateVisualizations() {
+        for (let [algorithm, arr] of Object.entries(arrays)) {
+            const arrayContainer = document.getElementById(`${algorithm}Array`);
+            if (arrayContainer) {
+                arrayContainer.innerHTML = '';
+                const maxVal = Math.max(...arr);
+                arr.forEach(val => {
+                    const bar = document.createElement('div');
+                    bar.className = 'bar';
+                    bar.style.height = `${(val / maxVal) * 100}%`;
+                    const span = document.createElement('span');
+                    span.textContent = val;
+                    bar.appendChild(span);
+                    arrayContainer.appendChild(bar);
+                });
             }
         }
+    }
 
-        async function partition(low, high) {
-            let pivot = array[high];
-            let i = low - 1;
-            
-            for (let j = low; j < high; j++) {
-                if (array[j] < pivot) {
-                    i++;
-                    await swap(i, j);
+    async function startSort() {
+        const speedInput = document.getElementById('animationSpeed');
+        animationSpeed = speedInput ? 1000 - parseInt(speedInput.value) || 500 : 500;
+        const sortPromises = [
+            quickSort(arrays.quickSort, 0, arrays.quickSort.length - 1),
+            bubbleSort(arrays.bubbleSort),
+            insertionSort(arrays.insertionSort),
+            selectionSort(arrays.selectionSort),
+            mergeSort(arrays.mergeSort, 0, arrays.mergeSort.length - 1),
+            heapSort(arrays.heapSort)
+        ];
+        await Promise.all(sortPromises);
+        markSorted();
+    }
+
+    function markSorted() {
+        for (let algorithm of Object.keys(arrays)) {
+            const arrayContainer = document.getElementById(`${algorithm}Array`);
+            if (arrayContainer) {
+                Array.from(arrayContainer.children).forEach(bar => {
+                    bar.style.backgroundColor = '#2ecc71';
+                });
+            }
+        }
+    }
+
+    async function quickSort(arr, low, high) {
+        if (low < high) {
+            let pi = await partition(arr, low, high);
+            await quickSort(arr, low, pi - 1);
+            await quickSort(arr, pi + 1, high);
+        }
+    }
+
+    async function partition(arr, low, high) {
+        let pivot = arr[high];
+        let i = low - 1;
+        for (let j = low; j <= high - 1; j++) {
+            await updateArray('quickSort', [j, high], 'compare');
+            if (arr[j] < pivot) {
+                i++;
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+                await updateArray('quickSort', [i, j], 'swap');
+            }
+        }
+        [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
+        await updateArray('quickSort', [i + 1, high], 'swap');
+        return i + 1;
+    }
+
+    async function bubbleSort(arr) {
+        let n = arr.length;
+        for (let i = 0; i < n - 1; i++) {
+            for (let j = 0; j < n - i - 1; j++) {
+                await updateArray('bubbleSort', [j, j + 1], 'compare');
+                if (arr[j] > arr[j + 1]) {
+                    [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+                    await updateArray('bubbleSort', [j, j + 1], 'swap');
                 }
             }
-            
-            await swap(i + 1, high);
-            return i + 1;
         }
+    }
 
-        async function swap(i, j) {
-            [array[i], array[j]] = [array[j], array[i]];
-            updateVisualization();
+    async function insertionSort(arr) {
+        let n = arr.length;
+        for (let i = 1; i < n; i++) {
+            let key = arr[i];
+            let j = i - 1;
+            await updateArray('insertionSort', [i], 'compare');
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                await updateArray('insertionSort', [j, j + 1], 'swap');
+                j = j - 1;
+            }
+            arr[j + 1] = key;
+            await updateArray('insertionSort');
+        }
+    }
+
+    async function selectionSort(arr) {
+        let n = arr.length;
+        for (let i = 0; i < n - 1; i++) {
+            let minIdx = i;
+            for (let j = i + 1; j < n; j++) {
+                await updateArray('selectionSort', [minIdx, j], 'compare');
+                if (arr[j] < arr[minIdx]) {
+                    minIdx = j;
+                }
+            }
+            [arr[minIdx], arr[i]] = [arr[i], arr[minIdx]];
+            await updateArray('selectionSort', [i, minIdx], 'swap');
+        }
+    }
+
+    async function mergeSort(arr, l, r) {
+        if (l >= r) {
+            return;
+        }
+        let m = l + parseInt((r - l) / 2);
+        await mergeSort(arr, l, m);
+        await mergeSort(arr, m + 1, r);
+        await merge(arr, l, m, r);
+    }
+
+    async function merge(arr, l, m, r) {
+        let n1 = m - l + 1;
+        let n2 = r - m;
+        let L = new Array(n1);
+        let R = new Array(n2);
+        for (let i = 0; i < n1; i++) L[i] = arr[l + i];
+        for (let j = 0; j < n2; j++) R[j] = arr[m + 1 + j];
+        let i = 0, j = 0, k = l;
+        while (i < n1 && j < n2) {
+            await updateArray('mergeSort', [k], 'compare');
+            if (L[i] <= R[j]) {
+                arr[k] = L[i];
+                i++;
+            } else {
+                arr[k] = R[j];
+                j++;
+            }
+            await updateArray('mergeSort', [k], 'swap');
+            k++;
+        }
+        while (i < n1) {
+            arr[k] = L[i];
+            await updateArray('mergeSort', [k], 'swap');
+            i++;
+            k++;
+        }
+        while (j < n2) {
+            arr[k] = R[j];
+            await updateArray('mergeSort', [k], 'swap');
+            j++;
+            k++;
+        }
+    }
+
+    async function heapSort(arr) {
+        let n = arr.length;
+        for (let i = Math.floor(n / 2) - 1; i >= 0; i--)
+            await heapify(arr, n, i);
+        for (let i = n - 1; i > 0; i--) {
+            [arr[0], arr[i]] = [arr[i], arr[0]];
+            await updateArray('heapSort', [0, i], 'swap');
+            await heapify(arr, i, 0);
+        }
+    }
+
+    async function heapify(arr, n, i) {
+        let largest = i;
+        let l = 2 * i + 1;
+        let r = 2 * i + 2;
+        if (l < n && arr[l] > arr[largest])
+            largest = l;
+        if (r < n && arr[r] > arr[largest])
+            largest = r;
+        if (largest != i) {
+            [arr[i], arr[largest]] = [arr[largest], arr[i]];
+            await updateArray('heapSort', [i, largest], 'swap');
+            await heapify(arr, n, largest);
+        }
+    }
+
+    async function updateArray(algorithm, highlightIndices = [], operation = '') {
+        const arrayContainer = document.getElementById(`${algorithm}Array`);
+        if (arrayContainer) {
+            const maxVal = Math.max(...arrays[algorithm]);
+            Array.from(arrayContainer.children).forEach((bar, index) => {
+                bar.style.height = `${(arrays[algorithm][index] / maxVal) * 100}%`;
+                if (highlightIndices.includes(index)) {
+                    bar.style.backgroundColor = operation === 'compare' ? '#f1c40f' : '#e74c3c';
+                } else {
+                    bar.style.backgroundColor = '#3498db';
+                }
+                bar.querySelector('span').textContent = arrays[algorithm][index];
+            });
             await new Promise(resolve => setTimeout(resolve, animationSpeed));
         }
+    }
 
-        function startSort() {
-            animationSpeed = 1000 - document.getElementById('animationSpeed').value;
-            quickSort(0, array.length - 1);
-        }
-
-        initArray();
+    // 初始化数组
+    document.addEventListener('DOMContentLoaded', initArrays);
     </script>
 </body>
 </html>
