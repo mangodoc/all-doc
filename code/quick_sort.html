@@ -7,48 +7,19 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding: 20px;
         }
         .container {
             display: flex;
             width: 100%;
             max-width: 1200px;
         }
-        .code-section {
+        .code, .visualization {
             flex: 1;
-            padding: 20px;
-            border-right: 1px solid #ccc;
-        }
-        .visualization-section {
-            flex: 1;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        #arrayContainer {
-            display: flex;
-            height: 300px;
-            align-items: flex-end;
-            margin: 20px 0;
-        }
-        .bar-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0 2px;
-        }
-        .bar {
-            background-color: #3498db;
-            transition: height 0.5s ease, background-color 0.5s ease;
-        }
-        .bar-value {
-            margin-top: 5px;
-            font-size: 12px;
+            margin: 10px;
         }
         pre {
             background-color: #f4f4f4;
@@ -56,177 +27,145 @@
             border-radius: 5px;
             overflow-x: auto;
         }
-        button {
-            margin: 10px;
-            padding: 10px 20px;
+        #array {
+            display: flex;
+            height: 200px;
+            align-items: flex-end;
+            border-bottom: 1px solid #333;
         }
-        .config {
-            margin: 10px 0;
+        .bar {
+            width: 20px;
+            background-color: #3498db;
+            margin: 0 1px;
+            transition: height 0.3s;
         }
-        label {
-            margin-right: 10px;
+        .controls {
+            margin-top: 20px;
         }
-        input {
-            width: 50px;
+        .summary {
+            margin-top: 20px;
+            text-align: left;
+            width: 100%;
+            max-width: 1200px;
         }
     </style>
 </head>
 <body>
     <h1>快速排序可视化</h1>
     <div class="container">
-        <div class="code-section">
-            <h2>快速排序算法</h2>
+        <div class="code">
+            <h2>核心代码</h2>
             <pre><code>
-function quickSort(arr, left = 0, right = arr.length - 1) {
-    if (left < right) {
-        const pivotIndex = partition(arr, left, right);
-        quickSort(arr, left, pivotIndex - 1);
-        quickSort(arr, pivotIndex + 1, right);
+function quickSort(arr, low, high) {
+    if (low < high) {
+        let pivotIndex = partition(arr, low, high);
+        quickSort(arr, low, pivotIndex - 1);
+        quickSort(arr, pivotIndex + 1, high);
     }
-    return arr;
 }
 
-function partition(arr, left, right) {
-    const pivot = arr[right];
-    let i = left - 1;
-
-    for (let j = left; j < right; j++) {
+function partition(arr, low, high) {
+    let pivot = arr[high];
+    let i = low - 1;
+    
+    for (let j = low; j < high; j++) {
         if (arr[j] < pivot) {
             i++;
             [arr[i], arr[j]] = [arr[j], arr[i]];
         }
     }
-    [arr[i + 1], arr[right]] = [arr[right], arr[i + 1]];
+    
+    [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
     return i + 1;
 }
             </code></pre>
         </div>
-        <div class="visualization-section">
-            <h2>可视化</h2>
-            <div class="config">
-                <label for="arrayLength">数组长度:</label>
-                <input type="number" id="arrayLength" value="10" min="5" max="50">
-                <label for="animationSpeed">动画速度 (ms):</label>
-                <input type="number" id="animationSpeed" value="1000" min="100" max="3000" step="100">
-            </div>
-            <div id="arrayContainer"></div>
-            <div>
-                <button onclick="generateArray()">生成新数组</button>
+        <div class="visualization">
+            <h2>可视化动画</h2>
+            <div id="array"></div>
+            <div class="controls">
+                <label for="arraySize">数组大小：</label>
+                <input type="number" id="arraySize" min="5" max="50" value="20">
+                <label for="animationSpeed">动画速度：</label>
+                <input type="range" id="animationSpeed" min="1" max="1000" value="500">
+                <button onclick="initArray()">生成新数组</button>
                 <button onclick="startSort()">开始排序</button>
             </div>
         </div>
     </div>
+    <div class="summary">
+        <h2>快速排序算法特点总结</h2>
+        <ul>
+            <li>平均时间复杂度：O(n log n)</li>
+            <li>最坏时间复杂度：O(n²)，当数组已经排序或接近排序时</li>
+            <li>空间复杂度：O(log n)，因为使用递归</li>
+            <li>原地排序算法，不需要额外的数组空间</li>
+            <li>不稳定排序，相同元素的相对位置可能改变</li>
+            <li>分治策略：选择一个基准元素，将数组分为两部分，递归排序</li>
+            <li>对于大型数据集表现良好，是实践中最快的排序算法之一</li>
+            <li>随机选择基准元素可以提高算法在已排序数组上的性能</li>
+            <li>适合并行化，可以在多核处理器上高效实现</li>
+        </ul>
+    </div>
 
     <script>
         let array = [];
-        let animationSteps = [];
-        let ANIMATION_DELAY = 1000;
+        let arraySize = 20;
+        let animationSpeed = 500;
 
-        function generateArray() {
-            const length = parseInt(document.getElementById('arrayLength').value);
-            array = Array.from({length: length}, () => Math.floor(Math.random() * 100) + 1);
-            renderBars();
+        function initArray() {
+            arraySize = parseInt(document.getElementById('arraySize').value);
+            array = Array.from({length: arraySize}, () => Math.floor(Math.random() * 100) + 1);
+            updateVisualization();
         }
 
-        function renderBars() {
-            const container = document.getElementById('arrayContainer');
-            container.innerHTML = '';
-            const maxValue = Math.max(...array);
-            const barWidth = Math.floor(300 / array.length);
-            array.forEach((value, index) => {
-                const barContainer = document.createElement('div');
-                barContainer.className = 'bar-container';
-
+        function updateVisualization() {
+            const arrayContainer = document.getElementById('array');
+            arrayContainer.innerHTML = '';
+            const maxVal = Math.max(...array);
+            array.forEach(val => {
                 const bar = document.createElement('div');
                 bar.className = 'bar';
-                bar.style.height = `${(value / maxValue) * 280}px`;
-                bar.style.width = `${barWidth}px`;
-                bar.setAttribute('data-value', value);
-
-                const barValue = document.createElement('div');
-                barValue.className = 'bar-value';
-                barValue.textContent = value;
-
-                barContainer.appendChild(bar);
-                barContainer.appendChild(barValue);
-                container.appendChild(barContainer);
+                bar.style.height = `${(val / maxVal) * 100}%`;
+                arrayContainer.appendChild(bar);
             });
         }
 
-        async function quickSort(arr, left = 0, right = arr.length - 1) {
-            if (left < right) {
-                const pivotIndex = await partition(arr, left, right);
-                await quickSort(arr, left, pivotIndex - 1);
-                await quickSort(arr, pivotIndex + 1, right);
+        async function quickSort(low, high) {
+            if (low < high) {
+                let pivotIndex = await partition(low, high);
+                await quickSort(low, pivotIndex - 1);
+                await quickSort(pivotIndex + 1, high);
             }
         }
 
-        async function partition(arr, left, right) {
-            const pivot = arr[right];
-            let i = left - 1;
-
-            for (let j = left; j < right; j++) {
-                if (arr[j] < pivot) {
+        async function partition(low, high) {
+            let pivot = array[high];
+            let i = low - 1;
+            
+            for (let j = low; j < high; j++) {
+                if (array[j] < pivot) {
                     i++;
-                    await swap(arr, i, j);
+                    await swap(i, j);
                 }
             }
-            await swap(arr, i + 1, right);
+            
+            await swap(i + 1, high);
             return i + 1;
         }
 
-        async function swap(arr, i, j) {
-            animationSteps.push({type: 'compare', indices: [i, j]});
-            await animate();
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-            animationSteps.push({type: 'swap', indices: [i, j]});
-            await animate();
+        async function swap(i, j) {
+            [array[i], array[j]] = [array[j], array[i]];
+            updateVisualization();
+            await new Promise(resolve => setTimeout(resolve, animationSpeed));
         }
 
-        function animate() {
-            return new Promise(resolve => {
-                setTimeout(() => {
-                    const step = animationSteps.shift();
-                    const barContainers = document.querySelectorAll('.bar-container');
-                    if (step.type === 'compare') {
-                        barContainers[step.indices[0]].querySelector('.bar').style.backgroundColor = '#e74c3c';
-                        barContainers[step.indices[1]].querySelector('.bar').style.backgroundColor = '#e74c3c';
-                    } else if (step.type === 'swap') {
-                        const bar1 = barContainers[step.indices[0]].querySelector('.bar');
-                        const bar2 = barContainers[step.indices[1]].querySelector('.bar');
-                        const value1 = barContainers[step.indices[0]].querySelector('.bar-value');
-                        const value2 = barContainers[step.indices[1]].querySelector('.bar-value');
-
-                        const tempHeight = bar1.style.height;
-                        const tempValue = bar1.getAttribute('data-value');
-                        
-                        bar1.style.height = bar2.style.height;
-                        bar1.setAttribute('data-value', bar2.getAttribute('data-value'));
-                        value1.textContent = bar2.getAttribute('data-value');
-                        
-                        bar2.style.height = tempHeight;
-                        bar2.setAttribute('data-value', tempValue);
-                        value2.textContent = tempValue;
-                        
-                        bar1.style.backgroundColor = '#2ecc71';
-                        bar2.style.backgroundColor = '#2ecc71';
-                    }
-                    setTimeout(() => {
-                        barContainers.forEach(container => container.querySelector('.bar').style.backgroundColor = '#3498db');
-                        resolve();
-                    }, ANIMATION_DELAY / 2);
-                }, ANIMATION_DELAY / 2);
-            });
+        function startSort() {
+            animationSpeed = 1000 - document.getElementById('animationSpeed').value;
+            quickSort(0, array.length - 1);
         }
 
-        async function startSort() {
-            ANIMATION_DELAY = parseInt(document.getElementById('animationSpeed').value);
-            animationSteps = [];
-            await quickSort(array);
-        }
-
-        // 初始化
-        generateArray();
+        initArray();
     </script>
 </body>
 </html>
