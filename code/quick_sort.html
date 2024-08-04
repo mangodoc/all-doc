@@ -3,16 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickSort Animation</title>
+    <title>QuickSort Visualization</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
         }
-        #container {
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+        }
+        .code-section {
+            flex: 1;
+            padding: 20px;
+            border-right: 1px solid #ccc;
+        }
+        .visualization-section {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #arrayContainer {
             display: flex;
             height: 300px;
             align-items: flex-end;
@@ -24,21 +42,56 @@
             background-color: #3498db;
             transition: height 0.5s ease, background-color 0.5s ease;
         }
-        #controls {
-            margin: 20px 0;
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
         }
         button {
-            margin: 0 10px;
+            margin: 10px;
             padding: 10px 20px;
         }
     </style>
 </head>
 <body>
-    <h1>QuickSort Animation</h1>
-    <div id="container"></div>
-    <div id="controls">
-        <button onclick="generateArray()">Generate New Array</button>
-        <button onclick="startSort()">Start Sort</button>
+    <h1>QuickSort Visualization</h1>
+    <div class="container">
+        <div class="code-section">
+            <h2>QuickSort Algorithm</h2>
+            <pre><code>
+function quickSort(arr, left = 0, right = arr.length - 1) {
+    if (left < right) {
+        const pivotIndex = partition(arr, left, right);
+        quickSort(arr, left, pivotIndex - 1);
+        quickSort(arr, pivotIndex + 1, right);
+    }
+    return arr;
+}
+
+function partition(arr, left, right) {
+    const pivot = arr[right];
+    let i = left - 1;
+
+    for (let j = left; j < right; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+    }
+    [arr[i + 1], arr[right]] = [arr[right], arr[i + 1]];
+    return i + 1;
+}
+            </code></pre>
+        </div>
+        <div class="visualization-section">
+            <h2>Visualization</h2>
+            <div id="arrayContainer"></div>
+            <div>
+                <button onclick="generateArray()">Generate New Array</button>
+                <button onclick="startSort()">Start Sort</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -47,12 +100,12 @@
         const ANIMATION_DELAY = 1000;
 
         function generateArray() {
-            array = Array.from({length: 15}, () => Math.floor(Math.random() * 100) + 1);
+            array = Array.from({length: 10}, () => Math.floor(Math.random() * 100) + 1);
             renderBars();
         }
 
         function renderBars() {
-            const container = document.getElementById('container');
+            const container = document.getElementById('arrayContainer');
             container.innerHTML = '';
             array.forEach((value, index) => {
                 const bar = document.createElement('div');
