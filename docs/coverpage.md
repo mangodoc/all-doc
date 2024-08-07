@@ -80,36 +80,28 @@
           desc: "最开始是在B站看的左神的算法视频，决定开始整理算法学习笔记。后面又开始接触到labuladong和代码随想录，<br/>虽然大神们都有很多总结，但是要融会贯通还是得靠刻意练习。",
           futures: [
             {
-              title: "前言基础",
-              remark: "1. 一些概念 （常数操作、时间复杂度、空间复杂度、对数器、比较器、master公式）<br/> 2. <a href='#/wys' target='_blank'>位运算</a> 最右位是1、异或交换、得到最右位为1的数字、计算中点值等<br/> 3. 存储方式（数组存储和链表存储）"
+              title: "第一章：基础概念",
+              remark: "1. 复杂度分析（时间复杂度、空间复杂度）<br/> 2. <a href='#/wys' target='_blank'>位运算</a><br/> 3. 其他的一些概念 （常数操作、、对数器、比较器、master公式）<br/>"
             },
             {
-              title: "数据结构基础篇",
-              remark: "1. <a href='#/ds/array/index' target='_blank'>数组</a>（字符串子串搜索之KMP算法）<br/> 2. <a href='#/ds/linktable/index' target='_blank'>链表</a>（单链表、双链表、环形链表、快慢指针）<br/> 3.  <a href='#/ds/stack/index' target='_blank'>栈</a>（先进先出、有效的括号、可做DFS实现）<br/> 4. <a href='#/ds/queue/index' target='_blank'>队列</a>（后进先出、优先级队列、双端队列、可做BFS实现）<br/> 5. 哈希表（哈希函数、哈希表实现、一致性哈希算法）"
+              title: "第二章：排序和搜索",
+              remark: "1. 递归和迭代（阶乘、反转字符串、8皇后问题、汉诺塔）<br/> 2. 排序（冒泡、插入、选择、快速、归并、堆排序）<br/> 3. 搜索(DFS、BFS、二分查找)"
             },
             {
-              title: "数据结构进阶篇",
-              remark: "1. 二叉树（二叉树遍历（BFS、DFS）、平衡二叉树、二叉搜索树、满二叉树、完全二叉树、序列化和反序列化、前缀树、红黑树）<br/> 2. 堆（HeapInsert和Heapify、数组实现堆、优先级队列）<br/> 3. 位图（Java实现位图、Linux系统权限设计、亿级URL黑名单判断设计、布隆过滤器） "
+              title: "第三章：数据结构基础篇",
+              remark: "1. <a href='#/ds/array/index' target='_blank'>数组</a>（字符串子串搜索之KMP算法）<br/> 2. <a href='#/ds/linktable/index' target='_blank'>链表</a>（单链表、双链表、环形链表、快慢指针）<br/> 3.  <a href='#/ds/stack/index' target='_blank'>栈</a>（先进先出、有效的括号、可做DFS实现）<br/> 4. <a href='#/ds/queue/index' target='_blank'>队列</a>（后进先出、优先级队列、双端队列、可做BFS实现）"
             },
             {
-              title: "数据结构高级篇",
-              remark: "1. 图(什么是图、存储方式、邻接表实现、图的创建、遍历、拓扑排序、最小生成树之Prim和Kruskal算法、最短路径之Dijkstra算法)<br/> 2. 并查集<br/> 3. 单调栈<br/> "
+              title: "第四章：数据结构进阶篇",
+              remark: "1. 哈希表（哈希函数、哈希表实现、一致性哈希算法）<br/> 2. 二叉树（二叉树遍历（BFS、DFS）、平衡二叉树、二叉搜索树、满二叉树、完全二叉树、序列化和反序列化、前缀树、红黑树）<br/> 3. 堆（HeapInsert和Heapify、数组实现堆、优先级队列）<br/> 4. 位图（Java实现位图、Linux系统权限设计）"
+            },
+            {
+              title: "第五章：数据结构高级篇",
+              remark: "1. 图(定义、存储方式、邻接表实现、图的创建、遍历、拓扑排序、最小生成树之Prim和Kruskal算法、最短路径之Dijkstra算法)<br/> 2. 跳表 <br/> 3. 布隆过滤器（亿级URL黑名单判断设计）<br/>4. 并查集<br/> 5. 单调栈<br/>"
             },
             {
               title: "算法进阶",
-              remark: "1. 回溯、暴力递归<br/> 2. 动态规划 <br/> 3. 贪心算法<br/> 4. DFS <br/> 5. BFS" 
-            },
-            {
-              title: "排序",
-              remark: "1. 冒泡<br/> 2. 插入<br/> 3. 选择<br/> 4. 快速<br/> 5. 归并<br/> 6. 堆排序"
-            },
-            {
-              title: "搜索",
-              remark: "遍历、DFS、BFS、二分"
-            },
-            {
-              title: "递归",
-              remark: "阶乘、反转字符串、8皇后问题、汉诺塔"
+              remark: "1. 回溯、暴力递归<br/> 2. 动态规划 <br/> 3. 贪心算法<br/>" 
             },
             {
               title: "索引",
