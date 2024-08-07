@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemma 2 演示</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>Gemma 2 文本生成演示</h1>
+    <textarea id="input_text" rows="4" cols="50" placeholder="请输入文本..."></textarea>
+    <br>
+    <button onclick="generateText()">生成</button>
+    <div id="output"></div>
+
+    <script>
+        function generateText() {
+            const inputText = document.getElementById('input_text').value;
+            const outputDiv = document.getElementById('output');
+            
+            outputDiv.innerHTML = '正在生成...';
+            
+            axios.post('/generate', {
+                input_text: inputText
+            })
+            .then(function (response) {
+                outputDiv.innerHTML = response.data.generated_text;
+            })
+            .catch(function (error) {
+                outputDiv.innerHTML = '发生错误: ' + error;
+            });
+        }
+    </script>
+</body>
+</html>

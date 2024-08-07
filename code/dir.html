@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据结构与算法目录</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f4f8;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .chapter {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .chapter:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .chapter-title, .section-title {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .chapter-title {
+            font-size: 1.5em;
+            color: #2c3e50;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .section {
+            font-size: 1.2em;
+            margin-top: 15px;
+            color: #34495e;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+        .subsection {
+            margin-left: 20px;
+            color: #7f8c8d;
+            padding: 5px 0;
+        }
+        .toggle-icon {
+            transition: transform 0.3s ease;
+            font-size: 0.8em;
+        }
+        .rotate {
+            transform: rotate(90deg);
+        }
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity 0.5s ease;
+        }
+        .fade-enter-from, .fade-leave-to {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ title }}</h1>
+        <div v-for="(chapter, index) in chapters" :key="index" class="chapter">
+            <div class="chapter-title" @click="toggleChapter(index)">
+                {{ chapter.title }}
+                <span class="toggle-icon" :class="{ rotate: chapter.isOpen }">▶</span>
+            </div>
+            <Transition name="fade">
+                <div v-if="chapter.isOpen">
+                    <div v-for="(section, sIndex) in chapter.sections" :key="sIndex" class="section">
+                        <div class="section-title" @click="toggleSection(index, sIndex)">
+                            {{ section.title }}
+                            <span v-if="section.subsections" class="toggle-icon" :class="{ rotate: section.isOpen }">▶</span>
+                        </div>
+                        <Transition name="fade">
+                            <div v-if="section.isOpen && section.subsections" class="subsection">
+                                <div v-for="(subsection, ssIndex) in section.subsections" :key="ssIndex">
+                                    {{ subsection }}
+                                </div>
+                            </div>
+                        </Transition>
+                    </div>
+                </div>
+            </Transition>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, ref } = Vue
+
+        createApp({
+            setup() {
+                const title = ref('数据结构与算法目录')
+                const chapters = ref([
+                    {
+                        title: '第一章: 基础概念',
+                        isOpen: true,
+                        sections: [
+                            { title: '复杂度分析', isOpen: false,
+                                subsections: ['时间复杂度', '空间复杂度']
+                            },
+                            { title: '递归和迭代', isOpen: true },
+                            { title: '位运算', isOpen: true },
+                            { title: '基本算法', isOpen: false,
+                                subsections: ['排序算法', '查找算法']
+                            }
+                        ]
+                    },
+                    {
+                        title: '第二章: 数据结构基础篇',
+                        isOpen: false,
+                        sections: [
+                            {
+                                title: '数组',
+                                isOpen: false
+                            },
+                            {
+                                title: '链表',
+                                isOpen: false,
+                            },
+                            {
+                                title: '栈',
+                                isOpen: false,
+                            },
+                            {
+                                title: '队列',
+                                isOpen: false,
+                            },
+                            {
+                                title: '哈希表',
+                                isOpen: false,
+                            },
+                            {
+                                title: '位图',
+                                isOpen: false,
+                            }
+                        ]
+                    },
+                    {
+                        title: '第三章: 数据结构进阶篇',
+                        isOpen: false,
+                        sections: [
+                            {
+                                title: '树',
+                                isOpen: false,
+                                subsections: ['二叉树', '平衡二叉树', '红黑树']
+                            },
+                            {
+                                title: '图',
+                                isOpen: false,
+                            },
+                            {
+                                title: '栈Trie（前缀树）',
+                                isOpen: false,
+                            },
+                            {
+                                title: '线段树（Segment Tree）',
+                                isOpen: false,
+                            },
+                            {
+                                title: '树状数组（Binary Indexed Tree）',
+                                isOpen: false,
+                            },
+                        ]
+                    },
+                    {
+                        title: '第四章: 数据结构高级篇',
+                        isOpen: false,
+                        sections: [
+                            {
+                                title: '堆',
+                                isOpen: false,
+                                subsections: ['二叉树', '平衡二叉树', '红黑树']
+                            },
+                            {
+                                title: '单调栈',
+                                isOpen: false,
+                            },
+                            {
+                                title: '并查集（Disjoint Set）',
+                                isOpen: false,
+                            },
+                            {
+                                title: '跳表（Skip List）',
+                                isOpen: false,
+                            },
+                            {
+                                title: 'Bloom Filter',
+                                isOpen: false,
+                            },
+                            {
+                                title: '斐波那契堆（Fibonacci Heap）',
+                                isOpen: false,
+                            },
+                            {
+                                title: 'B树（B-Tree）',
+                                isOpen: false,
+                            }
+                        ]
+                    }
+                ])
+
+                const toggleChapter = (index) => {
+                    chapters.value[index].isOpen = !chapters.value[index].isOpen
+                }
+
+                const toggleSection = (chapterIndex, sectionIndex) => {
+                    const section = chapters.value[chapterIndex].sections[sectionIndex]
+                    if (section.subsections) {
+                        section.isOpen = !section.isOpen
+                    }
+                }
+
+                return {
+                    title,
+                    chapters,
+                    toggleChapter,
+                    toggleSection
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>

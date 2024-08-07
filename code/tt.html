@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>快速排序可视化</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .container {
+      display: flex;
+      width: 80%;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .code {
+      width: 50%;
+      padding: 20px;
+      background-color: #f8f8f8;
+    }
+
+    .visualization-container {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .visualization {
+      height: 300px;
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .bar {
+      fill: steelblue;
+    }
+
+    .bar-comparing {
+      fill: orange;
+    }
+
+    .bar-swapping {
+      fill: red;
+    }
+
+    .bar-text {
+      font-size: 10px;
+      fill: white;
+      text-anchor: middle;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap; /* 允许换行 */
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .controls div {
+      margin: 5px 10px; /* 调整间距 */
+    }
+
+    .controls button {
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .controls label {
+      margin-right: 5px;
+    }
+
+    .controls input[type="number"],
+    .controls input[type="range"] {
+      width: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>快速排序可视化</h1>
+
+  <div class="container">
+    <div class="code">
+      <h2>快速排序核心代码 (JavaScript)</h2>
+      <pre>
+        <code>
+function partition(arr, low, high) {
+  let pivot = arr[high];
+  let i = (low - 1); 
+
+  for (let j = low; j <= high - 1; j++) {
+    if (arr[j] < pivot) {
+      i++; 
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+  }
+  [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
+  return (i + 1);
+}
+
+function quickSort(arr, low, high) {
+  if (low < high) {
+    let pi = partition(arr, low, high);
+
+    quickSort(arr, low, pi - 1);
+    quickSort(arr, pi + 1, high);
+  }
+}
+        </code>
+      </pre>
+    </div>
+    <div class="visualization-container">
+      <div class="visualization">
+        <svg id="visualization-svg"></svg>
+      </div>
+      <div class="controls">
+        <div>
+          <label for="data-length">数据长度:</label>
+          <input type="number" id="data-length" value="20" min="5" max="100">
+        </div>
+        <div>
+          <label for="bar-width">柱形宽度:</label>
+          <input type="number" id="bar-width" value="10" min="1" max="20">
+        </div>
+        <div>
+          <label for="animation-speed">动画速度:</label>
+          <input type="range" id="animation-speed" value="100" min="10" max="500">
+        </div>
+        <div> <button id="start-button">开始排序</button> </div>
+        <div> <button id="reset-button">重新生成数据</button> </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script>
+    // 可视化代码 (使用 D3.js)
+    const svg = d3.select("#visualization-svg");
+    const width = +svg.style("width").replace("px", "");
+    const height = +svg.style("height").replace("px", "");
+
+    let data = [];
+    let dataLengthInput = document.getElementById("data-length");
+    let barWidthInput = document.getElementById("bar-width");
+    let animationSpeedInput = document.getElementById("animation-speed");
+    let startButton = document.getElementById("start-button");
+    let resetButton = document.getElementById("reset-button");
+
+    function generateData() {
+      data = Array.from({length: dataLengthInput.value}, () => Math.floor(Math.random() * 100));
+    }
+
+    generateData();
+    render(data);
+
+    // 初始化柱状图
+    function render(data, comparingIndex = -1, swappingIndices = []) {
+      svg.selectAll("*").remove();
+
+      const barWidth = parseInt(barWidthInput.value);
+      const xScale = d3.scaleBand()
+        .domain(d3.range(data.length))
+        .range([0, width])
+        .padding(0.1);
+
+      const yScale = d3.scaleLinear()
+        .domain([0, d3.max(data)])
+        .range([0, height]);
+
+      svg.selectAll(".bar")
+        .data(data)
+        .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", (d, i) => xScale(i))
+        .attr("y", (d) => height - yScale(d))
+        .attr("width", barWidth) // 使用 barWidth 变量设置宽度
+        .attr("height", (d) => yScale(d))
+        .attr("fill", (d, i) => {
+          if (swappingIndices.includes(i)) {
+            return "red"; // 交换中的元素
+          } else if (i === comparingIndex) {
+            return "orange"; // 比较中的元素
+          } else {
+            return "steelblue"; // 默认颜色
+          }
+        });
+
+      // 添加数值显示
+      svg.selectAll(".bar-text")
+        .data(data)
+        .enter().append("text")
+        .attr("class", "bar-text")
+        .attr("x", (d, i) => xScale(i) + barWidth / 2)
+        .attr("y", (d) => height - yScale(d) + 15)
+        .text((d) => d);
+    }
+
+    // 调用快速排序并更新可视化
+    async function visualizeQuickSort() {
+      async function quickSortVisual(arr, low, high) {
+        if (low < high) {
+          let pi = await partitionVisual(arr, low, high);
+
+          await quickSortVisual(arr, low, pi - 1);
+          await quickSortVisual(arr, pi + 1, high);
+        }
+      }
+
+      async function partitionVisual(arr, low, high) {
+        let pivot = arr[high];
+        let i = (low - 1);
+
+        for (let j = low; j <= high - 1; j++) {
+          render(arr, j, [i + 1, high]); // 高亮比较和交换的元素
+          await sleep(animationSpeedInput.value);
+          if (arr[j] < pivot) {
+            i++;
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+            render(arr, j, [i, j]); // 高亮交换的元素
+            await sleep(animationSpeedInput.value);
+          }
+        }
+        [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
+        render(arr, -1, [i + 1, high]); // 高亮交换的元素
+        await sleep(animationSpeedInput.value);
+        return (i + 1);
+      }
+
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      await quickSortVisual(data, 0, data.length - 1);
+    }
+
+    // 监听按钮点击事件
+    startButton.addEventListener("click", visualizeQuickSort);
+
+    resetButton.addEventListener("click", () => {
+      generateData();
+      render(data);
+    });
+
+    // 监听柱形宽度变化
+    barWidthInput.addEventListener("change", () => {
+      render(data);
+    });
+  </script>
+
+</body>
+</html>
