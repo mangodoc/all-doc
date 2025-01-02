@@ -4,11 +4,7 @@
   margin:0 auto;
 }
 .coverpage .logo{
-  width: 35%;
-}
-.coverpage .desc{
-  padding: 10px;
-  color: gray;
+  width:30%;
 }
 .coverpage .future-remark{
   color:gray;
@@ -26,13 +22,24 @@
 .coverpage .footer a{
   font-size:14px;
 }
-.coverpage .desc{
-  text-align: left;
-  line-height: 25px;
+.icon-title{
+  height:50px;
+  padding:10px;
+  border-radius:5px;
+  font-size:16px;
 }
-.coverpage .version{
-  color: gray;
-  padding-bottom: 25px;
+.mg-badge {
+  color: #fff;
+  display: inline-block;
+  padding-left: 8px;
+  padding-right: 8px;
+  text-align: center;
+  background-color: green;
+  border-radius: 10%;
+  position: relative;
+  top: -15px;
+  left: 0px;
+  font-size: 15px;
 }
 
 @media only screen and (max-width: 500px) {
@@ -41,23 +48,19 @@
     margin:0 auto;
   }
   .coverpage .logo{
-    width: 80%;
-  }
-  .desc{
     width:100%;
   }
 }
 </style>
 
 <div class="coverpage">
-  <el-result style="margin:0 auto;">
+  <el-result style="margin:0 auto;" sub-title="学习MySQL，总结使用经验，分享给大家！">
     <template slot="icon">
-      <img class="logo" src="/static/logo.png">
+      <img class="logo" src="/static/mangodoc-template.png">
     </template>
     <template slot="extra">
-      <div class="desc" v-html="desc"></div>
       <el-button type="default" size="medium" @click="handleClick('changelog')">更新日志</el-button>
-      <el-button type="primary" class="theme-color" size="medium" @click="handleClick('6abc/index')">快速开始</el-button>
+      <el-button type="primary" class="theme-color" size="medium" @click="handleClick('README')">查看主页</el-button>
     </template>
   </el-result>
   <el-row>
@@ -79,25 +82,11 @@
     data(){
       return {
           footer: window.$mangodoc.footer,
-          title: window.$mangodoc.title,
           version: window.$mangodoc.version,
-          desc: "学习设计模式后整理的笔记",
           futures: [
             {
-              title: "前置理论",
-              remark: "1. <a href='#/6abc/index' target='_blank'>设计模式6大原则</a><br/>2. <a href='#/gof-kind' target='_blank'>GoF设计模式分类</a><br/>"
-            },
-            {
-              title: "创建型模式",
-              remark: "1. <a href='#/creational/singleton' target='_blank'>单例模式</a><br/>"
-            },
-            {
-              title: "结构型模式",
-              remark: ""
-            },
-            {
-              title: "行为型模式",
-              remark: "1. <a href='#/behavioral/chain' target='_blank'>责任链模式</a><br/>2. <a href='#/behavioral/template-method' target='_blank'>模板方法模式</a><br/>3. <a href='#/behavioral/strategy' target='_blank'>策略模式</a><br/>4. <a href='#/behavioral/observer' target='_blank'>观察者模式</a><br/>"
+              title: "内容1",
+              remark: "描述1"
             }
           ]
       }
