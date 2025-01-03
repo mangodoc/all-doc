@@ -85,8 +85,16 @@
           version: window.$mangodoc.version,
           futures: [
             {
-              title: "内容1",
-              remark: "描述1"
+              title: "基础",
+              remark: "基本概念、安装与配置、基础语法、数据类型"
+            },
+            {
+              title: "进阶",
+              remark: "索引、存储引擎、数据库架构"
+            },
+            {
+              title: "性能优化",
+              remark: "查询优化、索引优化、分库分表分区、读写分离、主从复制"
             }
           ]
       }
