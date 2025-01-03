@@ -4,7 +4,7 @@
   margin:0 auto;
 }
 .coverpage .logo{
-  width:30%;
+  width:80%;
 }
 .coverpage .future-remark{
   color:gray;
@@ -56,7 +56,7 @@
 <div class="coverpage">
   <el-result style="margin:0 auto;" sub-title="学习MySQL，总结使用经验，分享给大家！">
     <template slot="icon">
-      <img class="logo" src="/static/mangodoc-template.png">
+      <img class="logo" src="/static/logo.png">
     </template>
     <template slot="extra">
       <el-button type="default" size="medium" @click="handleClick('changelog')">更新日志</el-button>
