@@ -60,7 +60,7 @@
     </template>
     <template slot="extra">
       <el-button type="default" size="medium" @click="handleClick('changelog')">更新日志</el-button>
-      <el-button type="primary" class="theme-color" size="medium" @click="handleClick('README')">查看主页</el-button>
+      <el-button type="primary" class="theme-color" size="medium" @click="handleClick('README')">快速开始</el-button>
     </template>
   </el-result>
   <el-row>
@@ -90,7 +90,7 @@
             },
             {
               title: "进阶",
-              remark: "索引、存储引擎、数据库架构"
+              remark: "实验环境准备、索引、存储引擎、数据库架构"
             },
             {
               title: "性能优化",

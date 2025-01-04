@@ -8,20 +8,48 @@
         "index": "1"
     },
     {
-        "title": "mangodoc",
-        "href": "https://mangodoc.meiflower.top",
-        "target": "_blank",
+        "title": "基础",
+        "href": "#",
+        "target": "_self",
         "level": 1,
         "icon": "el-icon-s-promotion",
         "index": "2"
     },
     {
-        "title": "mangodoc-cli",
-        "href": "https://github.com/mg0324/mangodoc-cli",
-        "target": "_blank",
+        "title": "进阶",
+        "href": "#",
+        "target": "_self",
         "level": 1,
         "icon": "el-icon-s-promotion",
-        "index": "3"
+        "index": "3",
+        "children": [
+            {
+                "title": "实验环境准备",
+                "href": "#/advance/env-ready",
+                "target": "_self",
+                "level": 2,
+                "icon": "el-icon-s-promotion",
+                "index": "3-1"
+            }
+        ]
+    },
+    {
+        "title": "性能优化",
+        "href": "#",
+        "target": "_self",
+        "level": 1,
+        "icon": "el-icon-s-promotion",
+        "index": "4",
+        "children": [
+            {
+                "title": "性能优化总结",
+                "href": "#/optimization/summary",
+                "target": "_self",
+                "level": 2,
+                "icon": "el-icon-s-promotion",
+                "index": "4-1"
+            }
+        ]
     }
 
     
