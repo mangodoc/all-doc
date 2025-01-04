@@ -1,4 +1,8 @@
 # 实验环境准备
+## 前置阅读
+* [MySQL的安装](/#/basic/mysql-install)
+
+说明书<sup><a href='xxx'>[1]</a></sup>
 ## 创建学生表
 ``` sql
 CREATE TABLE `t_student` (

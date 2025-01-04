@@ -13,7 +13,17 @@
         "target": "_self",
         "level": 1,
         "icon": "el-icon-s-promotion",
-        "index": "2"
+        "index": "2",
+        "children": [
+            {
+                "title": "MySQL的安装",
+                "href": "#/basic/mysql-install",
+                "target": "_self",
+                "level": 2,
+                "icon": "el-icon-s-promotion",
+                "index": "2-1"
+            }
+        ]
     },
     {
         "title": "进阶",
