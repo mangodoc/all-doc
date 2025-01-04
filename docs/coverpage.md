@@ -90,7 +90,7 @@
             },
             {
               title: "进阶",
-              remark: "实验环境准备、索引、存储引擎、数据库架构"
+              remark: "* <a href='/#/advance/env-ready' target='_blank'>验环境准备</a><br/>* 索引、存储引擎、数据库架构"
             },
             {
               title: "性能优化",
