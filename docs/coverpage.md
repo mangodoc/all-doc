@@ -89,7 +89,7 @@
             },
             {
               title: "创建型模式",
-              remark: "1. <a href='#/creational/singleton' target='_blank'>单例模式</a><br/>"
+              remark: "1. <a href='#/creational/singleton' target='_blank'>单例模式</a><br/>2. <a href='#/creational/builder' target='_blank'>建造者模式</a><br/>"
             },
             {
               title: "结构型模式",
